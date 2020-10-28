@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
-import PokeList from "./PokeList";
-import Pagination from "./Pagination";
+import SWList from "./components/SWList";
+import Pagination from "./components/Pagination";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./style/style.css";
+import ToggleButton from "./components/ToggleButton";
 
 function App() {
-  const [pokemon, setPokemon] = useState([]);
+  const [selected, setSelected] = useState(false);
+  const [people, setPeople] = useState([]);
+  console.log(people);
 
   //State of page (change pages)
   const [currentPageUrl, setCurrentPageUrl] = useState(
-    "https://pokeapi.co/api/v2/pokemon/"
+    "https://swapi.dev/api/people"
   );
   const [nextPageUrl, setNextPageUrl] = useState();
   const [prevPageUrl, setPrevPageUrl] = useState();
 
-  //Loading Screen
-  const [loading, setLoading] = useState(true);
-
   //useEffect so it can be rendered once
   useEffect(() => {
-    setLoading(true);
     //Cancel a fetch and renew
     let cancel;
     //CurrentPageUrl = fetch URL
@@ -27,10 +28,9 @@ function App() {
         cancelToken: new axios.CancelToken((c) => (cancel = c)),
       })
       .then((res) => {
-        setLoading(false);
         setNextPageUrl(res.data.next);
         setPrevPageUrl(res.data.previous);
-        setPokemon(res.data.results.map((p) => p.name));
+        setPeople(res.data.results.map((p) => p.name));
       });
     return () => cancel();
   }, [currentPageUrl]);
@@ -44,18 +44,34 @@ function App() {
     setCurrentPageUrl(prevPageUrl);
   }
 
-  //If Loading takes time
-  if (loading) return "Loading...";
-
   return (
     //Empty tags: An empty fragment so we can render both JS
-    <>
-      <PokeList pokemon={pokemon} />
-      <Pagination
-        goToNextPage={nextPageUrl ? goToNextPage : null}
-        goToPrevPage={prevPageUrl ? goToPrevPage : null}
+    <div className="App-header">
+      <ToggleButton
+        selected={selected}
+        toggleSelected={() => {
+          setSelected(!selected);
+        }}
       />
-    </>
+      <div className="container">
+        <SWList people={people} />
+        <Pagination
+          goToNextPage={nextPageUrl ? goToNextPage : null}
+          goToPrevPage={prevPageUrl ? goToPrevPage : null}
+        />
+
+        <h4 style={{ fontSize: "14px", marginTop: "5px" }}>
+          Different form of{" "}
+          <a href="https://www.youtube.com/watch?v=o3ZUc7zH8BE">
+            Pokemon App
+          </a>{" "}
+          by{" "}
+          <a href="https://github.com/WebDevSimplified">
+            WebDevSimplified
+          </a>
+        </h4>
+      </div>
+    </div>
   );
 }
 
