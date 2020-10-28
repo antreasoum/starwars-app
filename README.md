@@ -1,7 +1,9 @@
 # Star Wars App API
 
+An App inspired by [Pokemon App API by WebDevSimplified] (https://github.com/WebDevSimplified/React-Pokemon-Pagination)
+
 <h2>Info</h2>
-This is a repo that uses SWAPI API to fetch random characters everytime<br>
+This is a repo that uses [SWAPI API] (https://swapi.dev) to fetch random characters everytime<br>
 
 <h3>COMPLETION: 100%</h3>
 
