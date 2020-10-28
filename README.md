@@ -2,7 +2,7 @@
 
 <h3>COMPLETION: 100%</h3>
 
-An App inspired by <a href="https://github.com/WebDevSimplified/React-Pokemon-Pagination">Pokemon App API by WebDevSimplified</a>
+An App inspired from <a href="https://github.com/WebDevSimplified/React-Pokemon-Pagination">Pokemon App API</a>, by <a href="https://courses.webdevsimplified.com/">WebDevSimplified</a><br>
 You can view the tutorial on <a href="https://www.youtube.com/watch?v=o3ZUc7zH8BE">Youtube</a>
 
 <h2>Info</h2>
